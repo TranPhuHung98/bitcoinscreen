@@ -153,15 +153,15 @@ class _MyAppState extends State<MyApp> {
   }
 
   var statusData = [
-    StatusValueModel(title: 'AVERAGE PRICE', value: '6280.65'),
-    StatusValueModel(title: 'ALLOCATION', value: '67.47'),
+    StatusValueModel(title: 'AVERAGE PRICE', value: 6280.65),
+    StatusValueModel(title: 'ALLOCATION', value: 67.47),
     StatusValueModel(
         title: 'TOTAL RETURN',
         valueStatus: ValueStatus.decrease,
-        value: '269.68'),
+        value: 269.68),
     StatusValueModel(
         title: 'TOTAL RETURN',
         percentStatus: PercentStatus.decrease,
-        value: '11.75'),
+        value: 11.75),
   ];
 }

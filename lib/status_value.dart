@@ -5,7 +5,7 @@ enum PercentStatus { increase, decrease, none }
 
 class StatusValueModel {
   final String title;
-  final String value;
+  final double value;
   final ValueStatus valueStatus;
   final PercentStatus percentStatus;
   StatusValueModel(
@@ -47,22 +47,15 @@ class StatusValue extends StatelessWidget {
   final Widget subTitle;
   const StatusValue({Key key, this.title, this.subTitle}) : super(key: key);
 
-  static StatusValue averagePriceAndAllocaion(String title, String price) => StatusValue(
+  static StatusValue averagePriceAndAllocaion(String title, double price) => StatusValue(
         title: Text(
           '$title',
           style: TextStyle(color: Colors.grey),
         ),
         subTitle: title=='AVERAGE PRICE'?Text('\$$price'):Text('$price%'),
       );
-
-  static StatusValue allocation(String title,String percent) => StatusValue(
-        title: Text(
-          '$title',
-          style: TextStyle(color: Colors.grey),
-        ),
-        subTitle: Text('$percent%'),
-      );
-  static StatusValue increaseValue(String title, String value) => StatusValue(
+      
+  static StatusValue increaseValue(String title, double value) => StatusValue(
         title: Text(
           '$title',
           style: TextStyle(color: Colors.grey),
@@ -73,17 +66,17 @@ class StatusValue extends StatelessWidget {
         ),
       );
 
-  static StatusValue decreaseValue(String title, String value) => StatusValue(
+  static StatusValue decreaseValue(String title, double value) => StatusValue(
         title: Text(
           '$title',
           style: TextStyle(color: Colors.grey),
         ),
         subTitle: Text(
-          '▾-\$$value',
+          '▾\$$value',
           style: TextStyle(color: Colors.red),
         ),
       );
-  static StatusValue decreasePercent(String title, String percent) =>
+  static StatusValue decreasePercent(String title, double percent) =>
       StatusValue(
         title: Text(
           '$title',
@@ -94,7 +87,7 @@ class StatusValue extends StatelessWidget {
           style: TextStyle(color: Colors.red),
         ),
       );
-  static StatusValue increasePercent(String title, String percent) =>
+  static StatusValue increasePercent(String title, double percent) =>
       StatusValue(
         title: Text(
           '$title',
