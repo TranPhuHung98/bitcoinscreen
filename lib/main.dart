@@ -4,30 +4,29 @@ import 'package:test_candlechart/status_value.dart';
 
 void main() {
   runApp(new MaterialApp(
-    home: new AnimatedPieChartExample(),
+    home: new MyApp(),
   ));
 }
 
-final List<List<CircularStackEntry>> _quarterlyProfitPieData = [
-  <CircularStackEntry>[
-    CircularStackEntry(
-      <CircularSegmentEntry>[
-        CircularSegmentEntry(67.43, Colors.orange[300]),
-        CircularSegmentEntry(100.0 - 67.43, Colors.grey[350]),
-      ],
-    ),
-  ],
-];
-
-class AnimatedPieChartExample extends StatefulWidget {
-  @override
-  _AnimatedPieChartExampleState createState() =>
-      new _AnimatedPieChartExampleState();
+List<List<CircularStackEntry>> _quarterlyProfitPieData(double percent) {
+  return [
+    <CircularStackEntry>[
+      CircularStackEntry(
+        <CircularSegmentEntry>[
+          CircularSegmentEntry(percent, Colors.orange[300]),
+          CircularSegmentEntry(100.0 - percent, Colors.grey[350]),
+        ],
+      ),
+    ],
+  ];
 }
 
-class _AnimatedPieChartExampleState extends State<AnimatedPieChartExample> {
-  final GlobalKey<AnimatedCircularChartState> _chartKey =
-      new GlobalKey<AnimatedCircularChartState>();
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => new _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final _chartSize = const Size(200.0, 200.0);
   final bitcoinPrice = '5,542.40';
   var color = Colors.purple[900];
@@ -63,16 +62,14 @@ class _AnimatedPieChartExampleState extends State<AnimatedPieChartExample> {
           ),
           SliverToBoxAdapter(
               child: Container(
-                padding: EdgeInsets.only(bottom: 0.0),
-                              child: Center(
-            child: Stack(
-                // alignment: Alignment(20.0, 20.0),
+            padding: EdgeInsets.only(bottom: 0.0),
+            child: Center(
+              child: Stack(
                 alignment: AlignmentDirectional.center,
                 children: <Widget>[
                   AnimatedCircularChart(
-                    key: _chartKey,
                     size: _chartSize,
-                    initialChartData: _quarterlyProfitPieData[0],
+                    initialChartData: _quarterlyProfitPieData(67.47)[0],
                     chartType: CircularChartType.Pie,
                   ),
                   CircleAvatar(
@@ -80,9 +77,9 @@ class _AnimatedPieChartExampleState extends State<AnimatedPieChartExample> {
                     radius: 60.0,
                   )
                 ],
+              ),
             ),
-          ),
-              )),
+          )),
           SliverGrid(
             delegate: SliverChildBuilderDelegate(
               (context, index) => statusData[index].initWidget(),
